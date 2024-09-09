@@ -1,28 +1,40 @@
-<nav class="fixed w-full top-0 bg-gray-100 z-10 py-4">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
-      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
-        <div class="hidden sm:flex items-center justify-center">
-          <div class="flex space-x-10">
-            <%= link_to 'Shop', root_path, class: "text-gray-500 hover:underline py-2 rounded-md text-md font-medium" %>
-          </div>
-        </div>
-        <div class="flex-shrink-0 flex items-center">
-          <%= link_to root_path do %>
-            <%= image_tag 'logo.png', class: 'block lg:hidden h-20 w-auto' %>
-          <% end %>
-          <%= link_to root_path do %>
-            <%= image_tag 'logo.png', class: 'hidden lg:block h-20 w-auto' %>
-          <% end %>
-        </div>
-        <div class="hidden sm:flex sml:ml-6 items-center justify-center">
-          <div class="flex space-x-10">
-            <%= link_to cart_path, class: "text-gray-500 hover:underline py-2 rounded-md text-md font-medium" do %>
-              <%= icon 'fa-solid', 'shopping-cart' %>
-            <% end %>
-          </div>
-        </div>
-      </div>
+<%# app/views/shared/_nav.html.erb %>
+<header class="main__header" data-controller="nav-animation">
+  <nav class="w-full bg-white flex items-center justify-between" data-nav-animation-target="nav">
+    <div class="flex w-full items-center justify-between sm:w-fit">
+      <%= link_to root_path, class: "flex items-center justify-center gap-4" do %>
+        <h1 class="brand__name">sebastien bourda <strong>Studio</strong></h1>
+      <% end %>
+
+      <button class="flex flex-col items-center justify-center gap-1 sm:hidden" data-nav-animation-target="navButton" data-action="click->nav-animation#toggleNav">
+        <span class="h-1 w-8 bg-black rounded-full transition-all delay-75 ease-in-out"></span>
+        <span class="h-1 w-8 bg-black rounded-full transition-all delay-75 ease-in-out"></span>
+        <span class="h-1 w-8 bg-black rounded-full transition-all delay-75 ease-in-out"></span>
+      </button>
     </div>
-  </div>
-</nav>
+
+    <ul id="desktop-nav" class="hidden space-x-6 sm:visible sm:flex sm:items-center" data-nav-animation-target="desktopNav">
+      <li class="nav__item">
+        <%#= link_to "Work", root_path, class: "link #{active_class(root_path)}" %>
+      </li>
+      <li class="nav__item">
+        <%#= link_to "About", about_path, class: "link #{active_class(about_path)}" %>
+      </li>
+      <li class="nav__item">
+        <%#= link_to "Contact", "mailto:reverie-blank.0t@icloud.com", class: "link" %>
+      </li>
+    </ul>
+  </nav>
+
+  <ul id="mobile-nav" class="mobile__nav h-0" data-nav-animation-target="mobileNav">
+    <li class="nav__item">
+      <%#= link_to "Work", root_path, class: "link #{active_class(root_path)}" %>
+    </li>
+    <li class="nav__item">
+      <%#= link_to "About", about_path, class: "link #{active_class(about_path)}" %>
+    </li>
+    <li class="nav__item">
+      <%#= link_to "Contact", "mailto:reverie-blank.0t@icloud.com", class: "link" %>
+    </li>
+  </ul>
+</header>

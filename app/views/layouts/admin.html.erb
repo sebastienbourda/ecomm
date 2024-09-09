@@ -41,6 +41,11 @@
               <% end %>
             </li>
             <li>
+              <%= link_to root_path, class: "block px-4 py-2 hover:rounded hover:bg-gray-700" do %>
+                <%= icon('fa-solid', 'house', class: 'mr-2') %> <span class="hidden md:inline-block">Home</span>
+              <% end %>
+            </li>
+            <li>
               <%= link_to destroy_admin_session_path, data: { "turbo-method": :delete, "turbo-confirm": "Are you sure you want to sign out?" }, class: "block px-4 py-2 hover:rounded hover:bg-gray-700" do %>
                 <%= icon('fa-solid', 'sign-out', class: 'mr-2') %> <span class="hidden md:inline-block">Sign out</span>
               <% end %>
@@ -48,7 +53,7 @@
           </ul>
         </nav>
         <div class="w-full p-8">
-        <%= yield %>
+          <%= yield %>
         </div>
       </div>
     </main>

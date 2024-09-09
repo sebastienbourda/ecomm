@@ -1,7 +1,5 @@
 class CheckoutsController < ApplicationController
   def create
-    stripe_secret_key = Rails.application.credentials.dig(:stripe, :secret_key)
-    Stripe.api_key = stripe_secret_key
     cart = params[:cart]
     line_items = cart.map do |item|
       product = Product.find(item["id"])
@@ -12,17 +10,17 @@ class CheckoutsController < ApplicationController
         return
       end
 
-      { 
+      {
         quantity: item["quantity"].to_i,
-        price_data: { 
+        price_data: {
           product_data: {
             name: item["name"],
             metadata: { product_id: product.id, size: item["size"], product_stock_id: product_stock.id }
           },
-          currency: "usd",
+          currency: "eur",
           unit_amount: item["price"].to_i
         }
-      } 
+      }
     end
 
     puts "line_items: #{line_items}"
@@ -32,8 +30,8 @@ class CheckoutsController < ApplicationController
       line_items: line_items,
       success_url: "http://localhost:3000/success",
       cancel_url: "http://localhost:3000/cancel",
-      shipping_address_collection: { 
-        allowed_countries: ['US', 'CA']
+      shipping_address_collection: {
+        allowed_countries: ['FR']
       }
     )
 
