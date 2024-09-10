@@ -18,9 +18,9 @@ class WebhooksController < ApplicationController
       return
     end
 
-    case event.type 
+    case event.type
     when 'checkout.session.completed'
-      session = event.data.object 
+      session = event.data.object
       shipping_details = session["shipping_details"]
       puts "Session: #{session}"
       if shipping_details
@@ -41,7 +41,7 @@ class WebhooksController < ApplicationController
         Stock.find(product["metadata"]["product_stock_id"]).decrement!(:amount, item["quantity"])
       end
     else
-      puts "Unhandled event type: #{event.type}" 
+      puts "Unhandled event type: #{event.type}"
     end
 
     render json: { message: 'success' }

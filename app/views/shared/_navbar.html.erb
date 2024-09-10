@@ -23,6 +23,11 @@
       <li class="nav__item">
         <%#= link_to "Contact", "mailto:reverie-blank.0t@icloud.com", class: "link" %>
       </li>
+      <li class="nav__item">
+        <%= link_to cart_path, class: "text-gray-500 hover:underline py-2 rounded-md text-md font-medium" do %>
+          <%= icon 'fa-solid', 'shopping-cart' %>
+        <% end %>
+      </li>
     </ul>
   </nav>
 
@@ -35,6 +40,11 @@
     </li>
     <li class="nav__item">
       <%#= link_to "Contact", "mailto:reverie-blank.0t@icloud.com", class: "link" %>
+    </li>
+    <li class="nav__item">
+      <%= link_to cart_path, class: "text-gray-500 hover:underline py-2 rounded-md text-md font-medium" do %>
+        <%= icon 'fa-solid', 'shopping-cart' %>
+      <% end %>
     </li>
   </ul>
 </header>

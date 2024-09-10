@@ -26,24 +26,30 @@
                   Address
                 </th>
                 <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">
-                  Total 
+                  Date
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">
+                  Total
                 </th>
               </tr>
             </thead>
             <tbody>
               <% @not_fulfilled_orders.each do |o| %>
                 <tr class="bg-gray-50 border-b">
-                  <td class="px-6 py-4 whitepsace-nowrap tex-sm font-medium text-gray-800 underline">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 underline">
                     <%= link_to o.id, [:admin, o], class: 'underline' %>
                   </td>
-                  <td class="px-6 py-4 whitepsace-nowrap tex-sm font-medium text-gray-800">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                     <%= o.customer_email %>
                   </td>
-                  <td class="px-6 py-4 whitepsace-nowrap tex-sm font-medium text-gray-800">
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800 max-w-xs truncate inline-block">
                     <%= o.address %>
                   </td>
-                  <td class="px-6 py-4 whitepsace-nowrap tex-sm font-medium text-gray-800">
-                    <%= o.total %>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                    <%= o.created_at.strftime("%d/%m/%Y") %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                    <%= formatted_price(o.total) %>
                   </td>
                 </tr>
               <% end %>
@@ -73,7 +79,7 @@
                   Address
                 </th>
                 <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">
-                  Total 
+                  Total
                 </th>
               </tr>
             </thead>

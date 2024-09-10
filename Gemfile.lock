@@ -194,6 +194,10 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    open-uri (0.4.1)
+      stringio
+      time
+      uri
     orm_adapter (0.5.0)
     pagy (6.5.0)
     pg (1.5.8)
@@ -296,6 +300,8 @@ GEM
     tailwindcss-rails (2.7.3-x86_64-linux)
       railties (>= 7.0.0)
     thor (1.3.2)
+    time (0.4.0)
+      date
     timeout (0.4.1)
     turbo-rails (2.0.6)
       actionpack (>= 6.0.0)
@@ -303,6 +309,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.13.1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -346,6 +353,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  open-uri
   pagy (~> 6.2)
   pg (~> 1.1)
   puma (>= 5.0)

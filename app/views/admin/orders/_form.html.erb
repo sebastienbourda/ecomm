@@ -22,8 +22,13 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :total %>
-    <%= form.number_field :total, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :total, "Total" %>
+    <p class="block mt-2 text-gray-800"><%= formatted_price(admin_order.total) %></p>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :total, "Total (Editable)" %>
+    <%= form.number_field :total, value: admin_order.total, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -35,3 +40,15 @@
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
+
+<script>
+  // Update the display value based on the hidden field
+  document.addEventListener('DOMContentLoaded', function() {
+    const hiddenTotalField = document.querySelector('input[name="order[total]"]');
+    const displayTotalField = document.getElementById('total_display');
+    displayTotalField.value = new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(hiddenTotalField.value);
+  });
+</script>

@@ -20,13 +20,20 @@
   </p>
 
   <% if order.order_products.any? %>
-    <strong class="block font-medium mb-1">Products:</strong>
-    <% order.order_products.each do |op| %>
-      <%= op.product.name %> 
-      <%= op.size %>
-      <%= op.quantity %>
-    <% end %>
+    <div class="mb-4">
+      <strong class="block text-lg font-medium mb-2">Products:</strong>
+      <ul class="list-disc pl-5 space-y-2">
+        <% order.order_products.each do |op| %>
+          <li class="space-x-2">
+            <span class="font-semibold"><%= op.product.name %></span>
+            <span class="text-gray-600">Size: <%= op.size %></span>
+            <span class="text-gray-600">Quantity: <%= op.quantity %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
+
 
   <% if action_name != "show" %>
     <%= link_to "Show this order", [:admin, order], class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
