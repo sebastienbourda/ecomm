@@ -15,11 +15,15 @@
 <div class="w-full grid grid-cols-12 mt-8 items-center gap-4">
   <% @products.each do |product| %>
     <%= link_to product_path(product), class: "span-#{product.span} h-96" do %>
-      <div class="flex flex-col h-full">
+      <div class="flex flex-col h-full overflow-hidden">
         <% if false %>
           <h2 class="text-gray-800 font-medium text-lg text-center mb-6"><%= product.name %></h2>
         <% end %>
-        <%= product.images.present? ? image_tag(product.images.first, class: "h-full w-full object-cover") : image_tag("http://via.placeholder.com/512", class: "h-full w-full object-cover") %>
+        <% if product.images.present? %>
+          <%= image_tag(product.images.first, class: "h-full w-full object-cover hover:scale-110 transition delay-250 ease-out") %>
+        <% else %>
+          <%= image_tag("http://via.placeholder.com/512", class: "h-full w-full object-cover hover:scale-110  transition delay-250 ease-out") %>
+        <% end %>
       </div>
     <% end %>
   <% end %>

@@ -2,8 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="products"
 export default class extends Controller {
-  static values = { size: String, product: Object }
-  static targets = ["imagePanel", "price"]
+  static values = { size: String, price: String, product: Object }
+  static targets = ["imagePanel", "price", "option"]
+
+  connect() {
+    console.log("Product controller connected", this.sizeValue);
+  }
 
   switchImage(event) {
     const selectedIndex = event.currentTarget.dataset.productsIndexParam
@@ -14,8 +18,10 @@ export default class extends Controller {
   }
 
   toggleSize(event) {
-    this.sizeValue = event.target.value;
+    this.sizeValue = event.target.selectedOptions[0].dataset.price;
     console.log(this.priceTarget);
+
+    console.log(this.optionTarget.value);
 
     // Check if priceTarget is defined before trying to access it
     if (this.priceTarget) {
@@ -23,8 +29,6 @@ export default class extends Controller {
     } else {
       console.error("Price target is not defined.");
     }
-
-    console.log("Selected size:", this.sizeValue, "Price:", event.target.selectedOptions[0].dataset.price);
   }
 
   formatCurrency(price) {
@@ -49,15 +53,17 @@ export default class extends Controller {
     const cart = localStorage.getItem("cart")
     if (cart) {
       const cartArray = JSON.parse(cart)
-      const foundIndex = cartArray.findIndex(item => item.id === this.productValue.id && item.size === this.sizeValue)
+      console.log(cartArray);
+
+      const foundIndex = cartArray.findIndex(item => item.id === this.productValue.id && item.size === this.optionTarget.selectedOptions[0].value)
       if (foundIndex >= 0) {
         cartArray[foundIndex].quantity = parseInt(cartArray[foundIndex].quantity) + 1
       } else {
         cartArray.push({
           id: this.productValue.id,
           name: this.productValue.name,
-          price: this.productValue.price,
-          size: this.sizeValue,
+          price: this.optionTarget.selectedOptions[0].dataset.price,
+          size: this.optionTarget.selectedOptions[0].value,
           quantity: 1
         })
       }
@@ -67,8 +73,8 @@ export default class extends Controller {
       cartArray.push({
         id: this.productValue.id,
         name: this.productValue.name,
-        price: this.productValue.price,
-        size: this.sizeValue,
+        price: this.optionTarget.selectedOptions[0].dataset.price,
+        size: this.optionTarget.selectedOptions[0].value,
         quantity: 1
       })
       localStorage.setItem("cart", JSON.stringify(cartArray))

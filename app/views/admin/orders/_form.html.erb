@@ -23,7 +23,9 @@
 
   <div class="my-5">
     <%= form.label :total, "Total" %>
-    <p class="block mt-2 text-gray-800"><%= formatted_price(admin_order.total) %></p>
+    <% if admin_order.total? %>
+      <p class="block mt-2 text-gray-800"><%= formatted_price(admin_order.total) %></p>
+    <% end %>
   </div>
 
   <div class="my-5">
