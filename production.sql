@@ -1,0 +1,1 @@
+CREATE DATABASE sbs_gallery_production

@@ -21,14 +21,13 @@ default: &default
 
 development:
   <<: *default
-  adapter: sqlite3
-  database: storage/development.sqlite3
+  database: sbs_gallery_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: ecomm
+  #username: sbs_gallery
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -56,7 +55,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: ecomm_test
+  database: sbs_gallery_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,4 +79,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %> 
+  database: sbs_gallery_production
+  username: sbs_gallery
+  password: <%= ENV["SBS_GALLERY_DATABASE_PASSWORD"] %>

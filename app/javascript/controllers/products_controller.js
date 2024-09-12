@@ -3,11 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="products"
 export default class extends Controller {
   static values = { size: String, price: String, product: Object }
-  static targets = ["imagePanel", "price", "option"]
+  static targets = ["imagePanel", "price", "option", "content", "openIcon", "closeIcon"]
 
-  connect() {
-    console.log("Product controller connected", this.sizeValue);
-  }
+  connect() {}
 
   switchImage(event) {
     const selectedIndex = event.currentTarget.dataset.productsIndexParam
@@ -19,9 +17,6 @@ export default class extends Controller {
 
   toggleSize(event) {
     this.sizeValue = event.target.selectedOptions[0].dataset.price;
-    console.log(this.priceTarget);
-
-    console.log(this.optionTarget.value);
 
     // Check if priceTarget is defined before trying to access it
     if (this.priceTarget) {
@@ -29,6 +24,17 @@ export default class extends Controller {
     } else {
       console.error("Price target is not defined.");
     }
+  }
+
+  toggleFeature() {
+    const expanded = this.contentTarget.getAttribute("aria-expanded") === "true";
+
+    this.contentTarget.setAttribute("aria-expanded", !expanded);
+    this.contentTarget.classList.toggle("hidden", expanded);
+
+    // Toggle icons
+    this.openIconTarget.classList.toggle("hidden", !expanded);
+    this.closeIconTarget.classList.toggle("hidden", expanded);
   }
 
   formatCurrency(price) {
@@ -53,7 +59,6 @@ export default class extends Controller {
     const cart = localStorage.getItem("cart")
     if (cart) {
       const cartArray = JSON.parse(cart)
-      console.log(cartArray);
 
       const foundIndex = cartArray.findIndex(item => item.id === this.productValue.id && item.size === this.optionTarget.selectedOptions[0].value)
       if (foundIndex >= 0) {
