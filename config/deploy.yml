@@ -1,0 +1,33 @@
+service: sbs-gallery
+image: se2b/sbs-gallery
+servers:
+  - 37.27.180.193
+registry:
+  username: se2b
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+env:
+  clear:
+    DB_HOST: 37.27.180.193
+    RAILS_SERVE_STATIC_FILES: true
+  secret:
+    - RAILS_MASTER_KEY
+    - SBS_GALLERY_DATABASE_PASSWORD
+
+# Use accessory services (secrets come from .env).
+accessories:
+  db:
+    image: postgres:15
+    host: 37.27.180.193
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: "sbs_gallery"
+        POSTGRES_DB: "sbs_gallery_production"
+      secret:
+        - SBS_GALLERY_DATABASE_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  - "sbs-gallery_storage:/rails/storage"
